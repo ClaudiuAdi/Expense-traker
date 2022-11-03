@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import "./ExpenseForm.css";
 
 function ExpenseForm(props) {
+  // define the 3 separate varaibles through useState
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
@@ -14,6 +15,7 @@ function ExpenseForm(props) {
   //     enteredDate: "",
   //   });
 
+  // as the user is tiping in the input field, we update the value for that input with the input (makes sense, trust me!!)
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
     // setUserInput({
@@ -43,16 +45,20 @@ function ExpenseForm(props) {
     // });
   };
 
+  // function that handles the submit (Add expense) event
   const submitHandler = (event) => {
+    // precent the default behavior
     event.preventDefault();
 
+    // create an object with the collected inputs
     const expenseData = {
       title: enteredTitle,
-      amount: enteredAmount,
+      amount: +enteredAmount,
       date: new Date(enteredDate),
     };
-
+    // call the function from the parent element, sending the object there
     props.onSaveExpenseData(expenseData);
+    // clear the input fields
     setEnteredTitle("");
     setEnteredAmount("");
     setEnteredDate("");
@@ -92,6 +98,7 @@ function ExpenseForm(props) {
         </div>
       </div>
       <div className="new-expense__actions">
+        {/* when the button "Cancel" is clicked, we call the function from the parent component to cancel and close the minimize the window(change the state dynamically) */}
         <button type="button" onClick={props.onCancel}>
           Cancel
         </button>

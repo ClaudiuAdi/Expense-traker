@@ -3,15 +3,19 @@ import ExpensesFilter from "./ExpensesFilter";
 import Card from "../UI/Card";
 import "./Expenses.css";
 import ExpensesList from "./ExpensesList";
+import ExpensesChart from "./ExpensesChart";
 
 // Receiving and sending date to another component
 function Expenses(props) {
-  const [filteredYear, setFilteredYear] = useState("2020");
+  // year by whom we display the expenses
+  const [filteredYear, setFilteredYear] = useState("2021");
 
+  // function that changes the year from the choice made in the child component(ExpensesFilter)
   const filterChangeHandler = (selectedYear) => {
     setFilteredYear(selectedYear);
   };
 
+  // filters the expenses by year
   const filteredExpenses = props.items.filter((expense) => {
     return expense.date.getFullYear().toString() === filteredYear;
   });
@@ -33,6 +37,7 @@ function Expenses(props) {
             date={expense.date}
           />
         ))} */}
+      <ExpensesChart expenses={filteredExpenses} />
       <ExpensesList items={filteredExpenses} />
     </Card>
   );

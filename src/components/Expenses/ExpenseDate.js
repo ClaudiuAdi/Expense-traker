@@ -1,7 +1,7 @@
 import React from "react";
 import "./ExpenseDate.css";
 
-// Receving data from another component
+// Receving date data from parent component(ExpenseItem) to display
 function ExpenseDate(props) {
   const monthYear = props.date.toLocaleString("en-US", { month: "long" });
   const day = props.date.toLocaleString("en-US", { day: "2-digit" });
